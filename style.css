@@ -1,0 +1,48 @@
+*{
+    background-color: rgba(177, 178, 255, 1);
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.pomo-container{
+    width: 550px;
+    height: 300px;
+    position: relative;
+    left: 375px;
+    background-color: rgba(210, 218, 255, 1);
+    border-radius: 5%;
+    margin-top: 150px;
+    border: solid 2px black;
+}
+
+.time-remaining{
+    position: relative;
+    left: 80px;
+    top: 30px;
+    font-size: 5em;
+    font-weight: 550;
+    width: 300px;
+    height: 150px;
+    padding-top: 20px;
+    padding-left: 55px;
+    border: solid 2px black;
+    border-radius: 7%;
+    
+}
+
+.button-container{
+    background-color: rgba(210, 218, 255,1);
+    /*border: dashed 2px black;*/
+    position: relative;
+    top: 60px;
+    padding-left: 150px;
+}
+
+.start-button, .pause-button{
+    border-radius: 10%;
+    text-transform: uppercase;
+    margin-right: 20px;
+    height: 40px;
+    width: 100px;
+}
