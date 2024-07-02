@@ -90,11 +90,3 @@ pauseButton.addEventListener("click", () => {
     }
 });
 
-//add audio. change color scheme for break (background color etc to be changed). change buttons to break-start-button and break-stop-button. or make this a huge function with parameters for pomoTime, breakMins? change text from "focus time" to "break time"
-        /*all.style.backgroundColor = "#92C7CF";
-        main.style.backgroundColor = "#92C7CF";  FIX THE COLOR THING LATERRRR
-        time.style.backgroundColor = "#92C7CF";
-        startButton.style.backgroundColor = "#92C7CF";
-        pauseButton.style.backgroundColor = "#92C7CF";
-        pomoContainer.style.backgroundColor = "rgba(170, 215, 217, 0.2)";
-        buttonContainer.style.backgroundColor = "rgba(170, 215, 217, 0.2)";*/
