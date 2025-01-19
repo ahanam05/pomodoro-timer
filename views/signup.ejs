@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/css/forms.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&display=swap');
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="signup-form">
+            <h2> Sign Up</h2>
+            <p class="subtitle">Start your productivity journey.</p>
+
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i data-feather="mail"></i>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        required 
+                        placeholder="E-mail"
+                        autocomplete="email"
+                    />
+                </div>
+                <div class="email error"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i data-feather="user"></i>
+                    <input 
+                        type="text" 
+                        name="username" 
+                        required 
+                        placeholder="Username"
+                        autocomplete="username"
+                    />
+                </div>
+                <div class="username error"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i data-feather="lock"></i>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        required 
+                        placeholder="Password"
+                        autocomplete="new-password"
+                    />
+                </div>
+                <div class="password error"></div>
+            </div>
+
+            <button type="submit"> Create Account </button>
+            
+        </form>
+
+        <div class="right-side">
+            <p> Already a member? 
+                <a href="/login" class="login-link">Log In</a>
+            </p>
+        </div>
+     
+    </div>
+
+    <script>
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
+
+        const form = document.querySelector('#signup-form');
+        const emailError = document.querySelector('.email.error');
+        const usernameError = document.querySelector('.username.error');
+        const passwordError = document.querySelector('.password.error');
+    
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            emailError.textContent = '';
+            usernameError.textContent = '';
+            passwordError.textContent = '';
+    
+            const email = form.email.value;
+            const username = form.username.value;
+            const password = form.password.value;
+
+            console.log("Received: ", email, username, password);
+    
+            try{
+                const res = await fetch('/signup', {
+                    method : 'POST',
+                    body: JSON.stringify({ email, username, password }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+    
+                const data = await res.json();
+    
+                if (data.errors) {
+                    emailError.textContent = data.errors.email;
+                    usernameError.textContent = data.errors.username;
+                    passwordError.textContent = data.errors.password;
+                }
+                if (data.user) {
+                    //redirect to setTimer page, check if this and the entire error correction works 
+                    location.assign('/setTimer');
+                }
+            } catch(err){
+                console.log(err);
+            }
+        })
+    
+    </script>
+</body>
+</html>

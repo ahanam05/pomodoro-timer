@@ -1,5 +1,5 @@
 *{
-    background-color: rgba(177, 178, 255, 1);
+    background-color: rgb(120, 89, 100);
     font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: 500;
     font-style: normal;
@@ -10,7 +10,7 @@
     height: 300px;
     position: relative;
     left: 375px;
-    background-color: rgba(210, 218, 255, 1);
+    background-color: rgb(213, 199, 188);
     border-radius: 5%;
     margin-top: 150px;
     border: solid 2px black;
@@ -32,7 +32,7 @@
 }
 
 .button-container{
-    background-color: rgba(210, 218, 255,1);
+    background-color: rgb(213, 199, 188);
     /*border: dashed 2px black;*/
     position: relative;
     top: 60px;
