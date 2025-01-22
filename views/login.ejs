@@ -59,6 +59,8 @@
             feather.replace();
         }
 
+        //test ALL of this
+
         const form = document.getElementById("login-form");
             const emailorUsernameError = document.querySelector(".emailOrUsername.error");
             const passwordError = document.querySelector(".password.error");
@@ -87,7 +89,7 @@
                         passwordError.textContent = data.errors.password;
                     }
                     if(data.user){
-                        //redirect to dashboard
+                        //redirect to timer page, test this out!
                         location.assign('/setTimer');
                     }
         

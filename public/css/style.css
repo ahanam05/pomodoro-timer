@@ -1,48 +1,66 @@
-*{
-    background-color: rgb(120, 89, 100);
-    font-family: "M PLUS Rounded 1c", sans-serif;
-    font-weight: 500;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", serif;
+    font-weight: 486;
     font-style: normal;
+    background-color: #e1e8e5; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.pomo-container{
-    width: 550px;
-    height: 300px;
-    position: relative;
-    left: 375px;
-    background-color: rgb(213, 199, 188);
-    border-radius: 5%;
-    margin-top: 150px;
-    border: solid 2px black;
+main {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
 }
 
-.time-remaining{
-    position: relative;
-    left: 80px;
-    top: 30px;
-    font-size: 5em;
-    font-weight: 550;
-    width: 300px;
-    height: 150px;
-    padding-top: 20px;
-    padding-left: 55px;
-    border: solid 2px black;
-    border-radius: 7%;
-    
+.pomo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
 }
 
-.button-container{
-    background-color: rgb(213, 199, 188);
-    /*border: dashed 2px black;*/
-    position: relative;
-    top: 60px;
-    padding-left: 150px;
+.time-remaining {
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #0d281f; 
+    background-color: #e1e8e5;
+    padding: 1.5rem 3rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.start-button, .pause-button{
-    border-radius: 10%;
-    text-transform: uppercase;
-    margin-right: 20px;
-    height: 40px;
-    width: 100px;
+.button-container {
+    display: flex;
+    gap: 1rem;
+}
+
+button {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1rem 2.25rem;
+    color: white;
+    background-color: #0d281f; 
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0b1f17; 
+}
+
+button:active {
+    transform: scale(0.95);
 }

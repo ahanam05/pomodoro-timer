@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require('cookie-parser');
 const routes = require("./routes/index");
 require("dotenv").config();
 
@@ -10,6 +11,7 @@ const PORT = process.env.PORT;
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 
