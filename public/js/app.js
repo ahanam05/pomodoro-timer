@@ -6,22 +6,27 @@ const all = document.querySelector("*");
 const pomoContainer = document.querySelector(".pomo-container");
 const buttonContainer = document.querySelector(".button-container");
 
-let pomoMins = 50; //add functionality of taking session length as input
-let breakMins = 10;
+let pomoMins = localStorage.getItem('pomoMins');
+let breakMins = Math.floor(pomoMins/5);
+console.log(`pomoMins: ${pomoMins}, breakMins: ${breakMins}`);
+
+document.addEventListener('DOMContentLoaded', (e) => {
+    time.textContent = `${pomoMins}:00`;
+})
+
 let zeroSec = "00";
 let pomoTime = pomoMins*60; 
 let breakTime = breakMins*60;
-//try objects for call by reference? we want to modify the variable value from within the function
-//what is a better way to do this?
+
 const timeObj = {
     pTime : pomoTime,
     bTime : breakTime,
     count : 0
 };
-let intervalID1; // bc const require initialisation during declaration
+let intervalID1; 
 let intervalID2;
 
-function timeLeft(chosenTime, otherTimeMins, initial){ //functions are call by value in javascript
+function timeLeft(chosenTime, otherTimeMins, initial){ 
     console.log(timeObj[chosenTime]);
     timeObj[chosenTime]--;
     let min = Math.floor(timeObj[chosenTime]/60);

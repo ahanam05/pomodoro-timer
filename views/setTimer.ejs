@@ -1,1 +1,37 @@
-take user input for clock duration
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/setTimer.css">
+    <title>Document</title>
+</head>
+<body>
+    <main class="focus-container">
+        <p class="tagline">Productivity Begins Here</p>
+        <p class="subheading">Set Your Focus Time</p>
+        <form class="focus-form">
+            <label for="time" class="input-label">Enter your focus time (in minutes):</label>
+            <div class="input-wrapper">
+                <input type="number" id="time" name="time" min="5" max="240" placeholder="e.g., 25" required>
+            </div>
+            <button type="submit" class="btn-submit">Start Focusing</button>
+        </form>
+    </main>
+
+    <script>
+        const form = document.querySelector(".focus-form");
+            const timeInput = document.querySelector("#time");
+        
+            form.addEventListener('submit', async (e) => {
+                const pomoMins = timeInput.value;
+                console.log(pomoMins);
+                e.preventDefault();
+
+                localStorage.setItem('pomoMins', pomoMins);
+                location.assign('/clock');
+        })
+        
+    </script>
+</body>
+</html>
