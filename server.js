@@ -7,6 +7,7 @@ require("dotenv").config();
 const app = express();
 
 const PORT = process.env.PORT;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -15,11 +16,9 @@ app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 
-const dbURI = 'mongodb+srv://user123:mongodb123@ac-utkzi0k.hlxuyz8.mongodb.net/pomodoro?retryWrites=true&w=majority';
-
 async function connectToDb(){
   try{
-      await mongoose.connect(dbURI);
+      await mongoose.connect(MONGODB_URI);
       console.log('Connected to MongoDB Atlas');
   } catch(error){
       console.log('An error occurred: ', error);

@@ -1,5 +1,102 @@
-
 body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", serif;
+    font-weight: 486;
+    font-style: normal;
+    background-color: #e1e8e5; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+.banner {
+    background-color: #0d281f;
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logout-button {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.logout-button:hover {
+    color: #f0f0f0;
+    text-decoration: underline;
+}
+
+main {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+    margin-top: 200px; 
+}
+
+.pomo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.time-remaining {
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #0d281f; 
+    background-color: #e1e8e5;
+    padding: 1.5rem 3rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+    display: flex;
+    gap: 1rem;
+}
+
+button {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1rem 2.25rem;
+    color: white;
+    background-color: #0d281f; 
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0b1f17; 
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+
+/*body {
     margin: 0;
     padding: 0;
     font-family: "Inter", serif;
@@ -64,3 +161,34 @@ button:hover {
 button:active {
     transform: scale(0.95);
 }
+
+.banner {
+    background-color: #0d281f;
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    top: 0px;
+}
+
+.logout-button {
+    position: absolute;
+    /*top: 20px;   
+    right: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem 1.125rem;
+    color: white;
+    background-color: #0d281f; 
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #0b1f17; 
+}
+
+.logout-button:active {
+    transform: scale(0.95);
+}*/

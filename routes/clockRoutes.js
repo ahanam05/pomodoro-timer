@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const clockController = require("../controllers/clockController");
-const { requireAuth, checkUser} = require('../middleware/authMiddleware');
+const { requireAuth, checkUser, noCache} = require('../middleware/authMiddleware');
 
-//not working with the middleware, check!
-router.get('/clock', requireAuth, checkUser, clockController.clock_get);
+router.get('/clock', noCache, requireAuth, checkUser, clockController.clock_get);
 
 module.exports = router;
