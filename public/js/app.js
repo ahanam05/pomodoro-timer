@@ -5,9 +5,9 @@ const pauseButton = document.querySelector(".pause-button");
 const all = document.querySelector("*");
 const pomoContainer = document.querySelector(".pomo-container");
 const buttonContainer = document.querySelector(".button-container");
-
+  
 let pomoMins = localStorage.getItem('pomoMins');
-let breakMins = Math.floor(pomoMins/5);
+let breakMins = pomoMins/5;
 console.log(`pomoMins: ${pomoMins}, breakMins: ${breakMins}`);
 
 document.addEventListener('DOMContentLoaded', (e) => {
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 let zeroSec = "00";
 let pomoTime = pomoMins*60; 
 let breakTime = breakMins*60;
+let isPomodoro = true;
 
 const timeObj = {
     pTime : pomoTime,
@@ -25,6 +26,37 @@ const timeObj = {
 };
 let intervalID1; 
 let intervalID2;
+
+async function sendPomodoroData() {
+    try {
+      console.log('In sendPomodoroData');
+      console.log('User ID: ', localStorage.getItem('userID'));
+      const currentDate = new Date().toISOString().slice(0, 10);
+        
+      const data = {
+        userID: localStorage.getItem('userID'), 
+        date: currentDate,
+        pomoMins: pomoMins,
+        breakMins: breakMins,
+      };
+  
+      const response = await fetch('clock', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (response.ok) {
+        console.log('Pomodoro data sent successfully');
+      } else {
+        console.error('Error sending Pomodoro data:', response.status);
+      }
+    } catch (error) {
+      console.error('Error sending Pomodoro data:', error);
+    }
+}
 
 function timeLeft(chosenTime, otherTimeMins, initial){ 
     console.log(timeObj[chosenTime]);
@@ -43,6 +75,11 @@ function timeLeft(chosenTime, otherTimeMins, initial){
         clearInterval(chosenTime === "pTime" ? intervalID1 : intervalID2); 
         time.textContent = `${otherTimeMins} : ${zeroSec}`;
         startButton.disabled = false;
+
+        if (!isPomodoro) {
+            sendPomodoroData();
+        }
+        isPomodoro = !isPomodoro;
     }
 }
 

@@ -90,8 +90,6 @@
             const email = form.email.value;
             const username = form.username.value;
             const password = form.password.value;
-
-            console.log("Received: ", email, username, password);
     
             try{
                 const res = await fetch('/signup', {
@@ -101,6 +99,10 @@
                 })
     
                 const data = await res.json();
+ 
+                //store currently logged in user for later use 
+                console.log("UserID through sign up: ", data.user.id);
+                localStorage.setItem("userID", data.user.id);
     
                 if (data.errors) {
                     emailError.textContent = data.errors.email;

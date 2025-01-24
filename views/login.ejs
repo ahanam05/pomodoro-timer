@@ -81,6 +81,10 @@
                     });
         
                     const data = await res.json();
+
+                    //store currently logged in user for later use 
+                    console.log("User id through log in: ", data.user.id);
+                    localStorage.setItem("userID", data.user.id);
                     
                     if(data.errors){
                         emailorUsernameError.textContent = data.errors.email;
