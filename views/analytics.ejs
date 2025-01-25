@@ -3,9 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/analytics.css">
     <title>Document</title>
+    <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>
 </head>
 <body>
-    Display analytics
+    <main>
+        <div class="analytics-container">
+            <h1 class="analytics-title">Your Pomodoro Wrapped!</h1>
+          
+            <div class="analytics-section">
+              <h2 class="analytics-subtitle">Usage Summary</h2>
+              <p>You were productive for <span class="stat">monthlyPomoMins</span> hours/mins this month.</p>
+              <p>Your focus has increased/decreased by <span class="stat"> focusChange </span> this week.</p>
+              <p>You took <span class="stat"> weeklyBreakMins </span> hours/mins of breaks this week. Stay rejuvenated! </p>
+            </div>
+          
+            <div class="analytics-section">
+              <h2 class="analytics-subtitle">Your Week in Pomodoros</h2>
+              <div id="weeklyProgressChart" style="width:600px;height:250px;"></div>
+            </div>
+          
+            <div class="analytics-section">
+              <h2 class="analytics-subtitle">Focus Heatmap</h2>
+              <div id="pomodoro-heatmap"></div>
+            </div>
+          </div>
+    </main>
+    <script src='js/weeklyProgressChart.js'></script>
 </body>
 </html>

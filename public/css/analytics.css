@@ -1,0 +1,49 @@
+
+:root {
+    --color-dark-green: #0d281f;
+    --color-light-green: #e1e8e5;
+  }
+
+  body {
+    background-color: var(--color-light-green);
+    font-family: Arial, sans-serif;
+    color: var(--color-dark-green);
+    margin: 0;
+    padding: 0;
+  }
+  
+  .analytics-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .analytics-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+  
+  .analytics-subtitle {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .analytics-section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .stat {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  #pomodoro-chart, #pomodoro-heatmap {
+    width: 100%;
+    height: 400px;
+  }
