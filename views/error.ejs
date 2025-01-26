@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        body {
+            font-family: "Inter", serif;
+            font-optical-sizing: auto;
+            font-weight: 486;
+            font-style: normal;
+            background-color: #e1e8e5;
+            color: #0d281f;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        a {
+            color: #0d281f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Oops! Something went wrong.</h1>
+    <p>
+        <%= message %>
+    </p>
+    <p><a href="/clock">Go back to the timer</a></p>
+</body>
+
+</html>

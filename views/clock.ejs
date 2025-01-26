@@ -18,10 +18,16 @@
                 </div>       
             </div>
             <div class="banner">
-                <a href="/analytics" > <button class="logout-button"> View Analytics </button></a>
+                <a id="analyticsLink" href="#" > <button class="logout-button"> View Analytics </button></a>
                 <a href="/logout" > <button class="logout-button"> Log Out </button></a>
             </div>
         </main>
         <script src="js/app.js" defer></script>
+        <script> 
+            const userID = localStorage.getItem('userID');
+            console.log("userID: ", userID);
+            const analyticsLink = document.getElementById('analyticsLink');
+            analyticsLink.href = `/analytics?userID=${userID}`;
+        </script>
     </body>
 </html>
