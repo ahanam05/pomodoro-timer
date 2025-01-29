@@ -1,59 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/analytics.css">
-    <title>Document</title>
-    <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>
-</head>
-<body>
-    <main>
-      <div class="banner"> 
-        <a href="/clock" > <button class="logout-button"> Go Back </button></a>
-        <a href="/logout" > <button class="logout-button"> Log Out </button></a>
-      </div>
-        <div class="analytics-container">
-            <h1 class="analytics-title">Your Pomodoro Wrapped!</h1>
-          
-            <% if (message) { %>
-              <div class="analytics-section">
-                  <p class="error-message"><%= message %></p>
-              </div>
-          <% } else { %>
-              <div class="analytics-section">
-                  <h2 class="analytics-subtitle">Usage Summary</h2>
-                  <p>You have been productive for a total of <span class="stat"><%= data.totalPomoHours.toFixed(1) %></span> hours.</p>
-                  <p>Your focus has <%= data.focusChange === 1 ? 'increased' : 'decreased' %> by <span class="stat"><%= data.focusPercentage.toFixed(2) %>%</span> this week.</p>
-                  <p>You took <span class="stat"><%= data.lastWeekBreakHours.toFixed(1) %></span> hours of breaks this week. Stay rejuvenated!</p>
-              </div>
-  
-              <div class="analytics-section">
-                  <h2 class="analytics-subtitle">Your Week in Pomodoros</h2>
-                  <div id="weeklyProgressChart" style="width:600px;height:250px;"></div>
-              </div>
-  
-              <div class="analytics-section">
-                  <h2 class="analytics-subtitle">Focus Heatmap</h2>
-                  <div id="pomodoro-heatmap"></div>
-              </div>
-          <% } %>
-      </div>
-    </main>
-    <script>
-        const weeklyProgressData =  <%- JSON.stringify(data.weeklyProgressData) %>;
 
-        Plotly.newPlot('weeklyProgressChart', [
-            {
-                x: weeklyProgressData.map(row => row.day),
-                y: weeklyProgressData.map(row => row.mins),
-                type: 'bar'
-            }
-        ], {
-            title: 'Weekly Progress',
-            xaxis: { title: 'Day' },
-            yaxis: { title: 'Minutes focused' }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/analytics.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <main>
+    <div class="banner">
+      <a href="/clock"> <button class="logout-button"> Go Back </button></a>
+      <a href="/logout"> <button class="logout-button"> Log Out </button></a>
+    </div>
+    <div class="analytics-container">
+      <h1 class="analytics-title">Your Pomodoro Wrapped!</h1>
+
+      <% if (message) { %>
+        <div class="analytics-section">
+          <p class="error-message">
+            <%= message %>
+          </p>
+        </div>
+        <% } else { %>
+          <div class="analytics-section">
+            <h2 class="analytics-subtitle">Usage Summary</h2>
+            <p>You have been productive for a total of <span class="stat">
+                <%= data.totalPomoHours.toFixed(2) %>
+              </span> hours.</p>
+            <p>Your focus has <%= data.focusChange===1 ? 'increased' : 'decreased' %> by <span class="stat">
+                  <%= data.focusPercentage.toFixed(2) %>%
+                </span> this week.</p>
+            <p>You took <span class="stat">
+                <%= data.lastWeekBreakHours.toFixed(2) %>
+              </span> hours of breaks this week. Stay rejuvenated!</p>
+          </div>
+
+          <div class="analytics-section">
+            <h2 class="analytics-subtitle">Your Week in Pomodoros</h2>
+            <div id="weeklyProgressChart"></div>
+          </div>
+
+          <div class="analytics-section">
+            <h2 class="analytics-subtitle">Focus Heatmap</h2>
+            <div class="heatmap-container">
+              <div id="heatmap" class="heatmap-grid"></div>
+            </div>
+          </div>
+          <% } %>
+    </div>
+  </main>
+  <script>
+    const weeklyProgressData =  <%- JSON.stringify(data.weeklyProgressData) %>;
+
+    Plotly.newPlot('weeklyProgressChart', [
+      {
+        x: weeklyProgressData.map(row => row.day),
+        y: weeklyProgressData.map(row => row.mins),
+        type: 'bar',
+        marker: {
+          color: '#0d281f',
+        },
+      },
+    ], {
+      title: 'Weekly Progress',
+      xaxis: {
+        title: 'Day',
+        titlefont: {
+          family: 'Arial, sans-serif',
+          size: 12,
+          color: '#333',
+        },
+        tickfont: {
+          family: 'Arial, sans-serif',
+          size: 10,
+          color: '#666',
+        },
+      },
+      yaxis: {
+        title: 'Minutes focused',
+        titlefont: {
+          family: 'Arial, sans-serif',
+          size: 12,
+          color: '#333',
+        },
+        tickfont: {
+          family: 'Arial, sans-serif',
+          size: 10,
+          color: '#666',
+        },
+      },
+    });
+
+    const heatmapData = <%- JSON.stringify(data.heatmapData) %>;
+
+    class FocusHeatmap {
+      constructor(containerId, data) {
+        this.container = document.getElementById(containerId);
+        this.data = data;
+        this.init();
+      }
+
+      getColor(minutes) {
+        if (!minutes) return '#ebedf0'; 
+
+        const thresholds = {
+            30: '#9be9a8',    
+            60: '#40c463',    
+            120: '#30a14e',   
+            240: '#216e39'    
+        };
+
+        for (const [threshold, color] of Object.entries(thresholds)) {
+          if (minutes <= threshold) return color;
+        }
+        return '#216e39'; 
+      }
+
+      generateDates() {
+        const dates = [];
+        const currentDate = new Date(new Date().getFullYear(), 0, 1); 
+
+        while (dates.length < 365) {
+          dates.push(new Date(currentDate));
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+        return dates;
+      }
+
+      createTooltip() {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
+        return tooltip;
+      }
+
+      init() {
+        const tooltip = this.createTooltip();
+        const dates = this.generateDates();
+
+        dates.forEach(date => {
+          const cell = document.createElement('div');
+          cell.className = 'heatmap-cell';
+
+          const dateStr = date.toISOString().split('T')[0];
+          const minutes = this.data[dateStr] || 0;
+
+          cell.style.backgroundColor = this.getColor(minutes);
+          cell.style.gridRow = date.getDay() + 1;
+
+          cell.addEventListener('mouseover', (e) => {
+            tooltip.style.display = 'block';
+            tooltip.textContent = `${date.toLocaleDateString()}: ${minutes} minutes`;
+            tooltip.style.left = `${e.pageX + 10}px`;
+            tooltip.style.top = `${e.pageY + 10}px`;
+          });
+
+          cell.addEventListener('mouseout', () => {
+            tooltip.style.display = 'none';
+          });
+
+          this.container.appendChild(cell);
         });
-    </script>
+      }
+    }
+
+   
+    document.addEventListener('DOMContentLoaded', () => {
+      new FocusHeatmap('heatmap', heatmapData);
+    });
+
+  </script>
 </body>
+
 </html>

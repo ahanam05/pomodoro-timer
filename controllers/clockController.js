@@ -14,8 +14,8 @@ module.exports.clock_post = async (req, res) => {
         const time = await UserTimeData.findOne({ userID });
 
         if (time) {
-            time.totalPomoMins += pomoMins;
-            time.totalBreakMins += breakMins;
+            time.totalPomoMins += Number(pomoMins);
+            time.totalBreakMins += Number(breakMins);
 
             const existingPomoIndex = time.yearPomoMins.findIndex((entry) => entry.date === date);
             const existingBreakIndex = time.yearBreakMins.findIndex((entry) => entry.date === date);

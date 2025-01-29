@@ -9,6 +9,7 @@ async function getPomoData(userID){
     }
 
     const { totalPomoMins, totalBreakMins, yearPomoMins, yearBreakMins } = time;
+    console.log("totalPomoMins: ", totalPomoMins);
     const totalPomoHours = totalPomoMins / 60;
 
     // Calculate last week's and second-to-last week's focus minutes
@@ -60,6 +61,7 @@ async function getPomoData(userID){
         focusPercentage,
         lastWeekBreakHours,
         lastWeekPomo,
+        yearPomoMins
     };
 
     return data;
@@ -86,6 +88,13 @@ module.exports.analytics_get = async (req, res) => {
 
         data.weeklyProgressData = weeklyProgressData;
 
+        const heatmapData = {};
+        data.yearPomoMins.forEach((entry) => {
+            heatmapData[entry.date] = entry.minutes;
+        });
+
+        data.heatmapData = heatmapData;
+        console.log(data);
         res.render('analytics', { data, message: null });
     } catch (error) {
         console.error('Error fetching analytics data:', error);
