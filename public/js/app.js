@@ -58,6 +58,8 @@ async function sendPomodoroData() {
     }
 }
 
+const alarmSound = new Audio('../sounds/alarm_clock.mp3');
+
 function timeLeft(chosenTime, otherTimeMins, initial){ 
     console.log(timeObj[chosenTime]);
     timeObj[chosenTime]--;
@@ -71,6 +73,7 @@ function timeLeft(chosenTime, otherTimeMins, initial){
     }
     time.textContent = `${min} : ${sec}`;
     if(min == 0 && sec == 0){
+        alarmSound.play();
         timeObj[chosenTime] = initial;
         clearInterval(chosenTime === "pTime" ? intervalID1 : intervalID2); 
         time.textContent = `${otherTimeMins} : ${zeroSec}`;
